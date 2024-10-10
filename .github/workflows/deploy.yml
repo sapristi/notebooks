@@ -24,11 +24,14 @@ jobs:
             bash
           cache-environment: true
           post-cleanup: 'all'
+      - name: Install voici
+        run: |
+          mamba install voici
       - name: Export notebooks
         run: |
-          voici build notebooks --output-dir dist | true
+          voici build notebooks --output-dir dist --strip_sources=False | true
           mkdir dist/files
-          voici build notebooks --output-dir dist
+          voici build notebooks --output-dir dist --strip_sources=False
         shell: micromamba-shell {0}
         #   run: |
         #     pip install pdm
