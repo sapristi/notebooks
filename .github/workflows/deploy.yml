@@ -19,14 +19,14 @@ jobs:
         uses: mamba-org/setup-micromamba@v1
         with:
           micromamba-version: '1.5.6-0' # any version from https://github.com/mamba-org/micromamba-releases
-          environment-file: environment.yml
+          environment-file: build-environment.yml
           init-shell: >-
             bash
           cache-environment: true
           post-cleanup: 'all'
-      - name: Install voici
-        run: |
-          micromamba install voici -n voici-env
+      # - name: Install voici
+      #   run: |
+      #     micromamba install voici -n bui-env
       - name: Export notebooks
         run: |
           voici notebooks --output-dir dist --strip_sources=False
@@ -35,16 +35,6 @@ jobs:
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
-
-        #   run: |
-        #     pip install pdm
-        #     pdm install
-        # - name: Build the JupyterLite site
-        #   run: |
-        #     pdm run jupyter lite build --contents content --output-dir dist
-        # - name: post-treatment
-        #   run: |
-        #     pdm run python other/post_treatment.py dist/files/
 
   deploy:
     needs: build

@@ -1,3 +1,4 @@
+# File used by voici, contains dependencies used in the notebooks
 name: voici-env
 channels:
   - https://repo.mamba.pm/emscripten-forge
