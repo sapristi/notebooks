@@ -19,6 +19,7 @@ jobs:
         uses: mamba-org/setup-micromamba@v1
         with:
           micromamba-version: '1.5.6-0' # any version from https://github.com/mamba-org/micromamba-releases
+          environment-name: ci
           environment-file: environment.yml
           init-shell: >-
             bash
@@ -26,7 +27,7 @@ jobs:
           post-cleanup: 'all'
       - name: Install voici
         run: |
-          micromamba install voici
+          micromamba install voici -n ci
       - name: Export notebooks
         run: |
           voici build notebooks --output-dir dist --strip_sources=False | true
