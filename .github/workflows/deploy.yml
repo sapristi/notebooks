@@ -29,7 +29,7 @@ jobs:
           micromamba install voici -n voici-env
       - name: Export notebooks
         run: |
-          voici build notebooks --output-dir dist --strip_sources=False
+          voici notebooks --output-dir dist --strip_sources=False
         shell: micromamba-shell {0}
         #   run: |
         #     pip install pdm
