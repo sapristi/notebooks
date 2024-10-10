@@ -30,8 +30,6 @@ jobs:
           micromamba install voici -n ci
       - name: Export notebooks
         run: |
-          voici build notebooks --output-dir dist --strip_sources=False | true
-          mkdir dist/files
           voici build notebooks --output-dir dist --strip_sources=False
         shell: micromamba-shell {0}
         #   run: |
@@ -50,7 +48,7 @@ jobs:
 
   deploy:
     needs: build
-    if: github.ref == 'refs/heads/main'
+    if: github.ref == 'refs/heads/master'
     permissions:
       pages: write
       id-token: write
