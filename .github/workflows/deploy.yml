@@ -19,14 +19,14 @@ jobs:
         uses: mamba-org/setup-micromamba@v1
         with:
           micromamba-version: '1.5.6-0' # any version from https://github.com/mamba-org/micromamba-releases
-          environment-file: build-environment.yml
+          environment-name: build-env
+          create-args: >-
+            python=3.11
+            voici
           init-shell: >-
             bash
           cache-environment: true
           post-cleanup: 'all'
-      # - name: Install voici
-      #   run: |
-      #     micromamba install voici -n bui-env
       - name: Export notebooks
         run: |
           voici notebooks --output-dir dist --strip_sources=False
