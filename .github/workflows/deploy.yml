@@ -29,7 +29,7 @@ jobs:
           post-cleanup: 'all'
       - name: Export notebooks
         run: |
-          voici notebooks --output-dir dist --strip_sources=False
+          JUPYTER_PATH=jupyter_data PYTHONPATH=. voici notebooks --output-dir dist --strip_sources=False
         shell: micromamba-shell {0}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
