@@ -40,10 +40,10 @@ jobs:
         # - name: post-treatment
         #   run: |
         #     pdm run python other/post_treatment.py dist/files/
-        # - name: Upload artifact
-        #   uses: actions/upload-pages-artifact@v3
-        #   with:
-        #     path: ./dist
+        - name: Upload artifact
+          uses: actions/upload-pages-artifact@v3
+          with:
+            path: ./dist
 
   deploy:
     needs: build
