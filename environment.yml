@@ -1,4 +1,4 @@
-name: my-dashboard-env
+name: voici-env
 channels:
   - https://repo.mamba.pm/emscripten-forge
   - conda-forge
