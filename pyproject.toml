@@ -1,0 +1,22 @@
+[project]
+name = "notebooks"
+version = "0.1.0"
+description = "Default template for PDM package"
+authors = [
+    {name = "Mathias Millet", email = "mathias@mmill.eu"},
+]
+dependencies = [
+    "voici>=0.7.1",
+    "jupyterlab>=4.2.5",
+    "ipycanvas>=0.13.3",
+]
+requires-python = "==3.12.*"
+readme = "README.md"
+license = {text = "AGPL"}
+
+
+[tool.pdm]
+distribution = false
+
+[tool.pdm.scripts]
+_.env = {JUPYTER_PATH = "jupyter_data", PYTHONPATH="."}
