@@ -1,0 +1,29 @@
+
+nav.toc-wrapper {
+  background-color: var(--md-background);;
+  width: 260px;
+  padding: 1rem;
+  padding-left: 2rem;
+  overflow-y: auto;
+  position: fixed;
+  max-height: 90%;
+  z-index: 1;
+  border: 1px solid black;
+}
+
+nav  ul {
+  padding-left: 0;
+}
+
+nav ul ul {
+  padding-left: 20px;
+}
+
+/* toc */
+.current.toc-item {
+  background-color: #ffad8e;
+}
+
+main {
+  margin-left: 300px;
+}

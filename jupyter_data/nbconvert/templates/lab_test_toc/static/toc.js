@@ -1,11 +1,19 @@
 // inspired from https://benfrain.com/building-a-table-of-contents-with-active-indicator-using-javascript-intersection-observers/
+
+// Root element at which we will insert the toc
+var insertNode = document.querySelector("#toc-anchor");
+
+// Element containing the headings
+var wrappingElement = document.querySelector("body > main");
+// Get all headings
+var allHtags = wrappingElement.querySelectorAll("h1, h2, h3");
+
 // Intersection Observer Options
 var options = {
     root: null,
     rootMargin: "0px",
-    threshold: [0, 1],
+    threshold: [1],
 };
-
 
 // contains current tags
 const state = {
@@ -52,14 +60,17 @@ function updateCurrent(intersectionEvents) {
 
 // Function that runs when the Intersection Observer fires
 function setCurrent(e) {
+    console.log("Current", e)
+    console.log("Current", e.map(e => e.target))
     var allSectionLinks = document.querySelectorAll(".toc-item");
+    if (allSectionLinks === undefined) {return}
     for (const item of e) {
         allSectionLinks.forEach(link => link.classList.remove("current"));
+        // document.querySelector(`a[href="#${item.target.id}"]`).classList.add("current");
         document.getElementById(`${item.target.id}-toc-item`).classList.add("current");
         break;
     }
 };
-
 
 // Each Intersection Observer runs setCurrent
 var observeHtags = new IntersectionObserver(updateCurrent, options);
@@ -90,10 +101,11 @@ function getProperListSection(heading, previousHeading, currentListElement) {
 function addNavigationLinkForHeading(heading, currentSectionList) {
     let listItem = document.createElement("li");
     let link = document.createElement("a");
-    link.innerHTML = heading.innerHTML;
     link.href = `#${heading.id}`;
+    link.innerHTML = heading.innerHTML;
     listItem.appendChild(link);
     listItem.id = `${heading.id}-toc-item`;
+    listItem.target_id = heading.id
     listItem.classList.add("toc-item");
     currentSectionList.appendChild(listItem);
 }
@@ -102,15 +114,6 @@ function addNavigationLinkForHeading(heading, currentSectionList) {
 
 // Build the DOM for the menu
 function createTOC() {
-    // Root element at which we will insert the toc
-    var insertNode = document.querySelector("#toc-anchor");
-
-    // Element containing the headings
-    var wrappingElement = document.querySelector("body > #main");
-    // Get all headings
-    var allHtags = wrappingElement.querySelectorAll("h1, h2, h3");
-
-    console.log(`Found ${allHtags.length} headings`)
     var frag = document.createDocumentFragment();
     var jsNav = document.createElement("nav");
     jsNav.classList.add("toc-wrapper");
@@ -138,31 +141,12 @@ function createTOC() {
     });
 };
 
+(function setUp() {
+    if (wrappingElement === null) {
+      console.warn("Cannot find elem");
+        return;
+    }
+  console.log("Found", wrappingElement);
+    createTOC();
+})();
 
-function waitForElem(selector, direction) {
-    if (direction === undefined) {direction=true}
-    console.log("Waiting for ", selector, direction)
-    return new Promise(resolve => {
-
-        const observer = new MutationObserver(mutations => {
-            const observed = document.querySelector(selector);
-            console.debug("Observed", observed)
-            if ((observed === null) != direction) {
-                observer.disconnect();
-                resolve(observed);
-            }
-        });
-
-        // If you get "parameter 1 is not of type 'Node'" error, see https://stackoverflow.com/a/77855838/492336
-        observer.observe(document.documentElement, {
-            childList: true,
-            subtree: true
-        });
-    });
-};
-
-waitForElem('body > #main', true).then(() => {
-    waitForElem('body > #loading', false).then(
-        createTOC
-    )
-});
