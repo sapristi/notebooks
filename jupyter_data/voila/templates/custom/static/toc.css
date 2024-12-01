@@ -8,7 +8,7 @@ nav.toc-wrapper {
   position: fixed;
   max-height: 90%;
   z-index: 1;
-  border: 1px solid black;
+  box-shadow: rgba(99, 99, 99, 0.5) 5px 5px 5px 0px;
 }
 
 nav  ul {
