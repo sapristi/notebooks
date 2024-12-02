@@ -423,8 +423,10 @@ all of MD as it is not optimized for dense, information rich UIs.
 
 
   /* CUSTOM */
+  /* https://paletton.com/#uid=31b0u0keQs7j-cvpFjP5yEdc9Oy */
+  /* https://paletton.com/#uid=31b0u0kaVw7eXdLmDni2+Nh8qU- */
   --notebook-background: #527590;
-  --md-background: #A0B1BE;
-  --code-background: #8EBADC;
+  --md-background: #C5D0D8;
+  --code-background: #B3D3ED;
   --jp-layout-color0: #527590;
 }
